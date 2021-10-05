@@ -16,11 +16,27 @@ namespace GetPi
         Graphics gr;
         int nInSquare, nInCircle, radius, centerX, centerY;
         Random rnd = new Random();
-        //private void countRect_Click(object sender, EventArgs e)
-        //{
-        //    countRect.Text = 
-        //}
+        bool isStarted = false;
+        bool firstStart = true;
+        private void timer_Tick(object sender, EventArgs e)
+        {
 
+            if (!isStarted) return;
+
+            int x = rnd.Next(0, 600);
+            int y = rnd.Next(0, 600);
+            gr.FillEllipse(Brushes.Red, x, y, 5, 5);
+            nInSquare++;
+            countRect.Text = nInSquare.ToString();
+            if (Math.Sqrt((centerX - x) * (centerX - x) + (centerY - y) * (centerY - y)) <= radius)
+            {
+                nInCircle++;
+                countCircle.Text = nInCircle.ToString();
+            }
+            double tempPi = (double)4 * nInCircle / nInSquare;
+            pi.Text = tempPi.ToString();
+
+        }
         
 
         public FormMain()
@@ -35,41 +51,28 @@ namespace GetPi
             centerY = 300;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonStart(object sender, EventArgs e)
         {
-            gr.FillEllipse(Brushes.Bisque, 0, 0, 600, 600);
-            for (int i = 0; i < 10000; i++)
+            if (firstStart)
             {
-                int x = rnd.Next(0, 600);
-                int y = rnd.Next(0, 600);
-                gr.FillEllipse(Brushes.Red, x, y, 5, 5);
-                nInSquare++;
-                countRect.Text = nInSquare.ToString();
-                if (Math.Sqrt((centerX - x) * (centerX - x) + (centerY - y) * (centerY - y)) <= radius)
-                {
-                    nInCircle++;
-                    countCircle.Text = nInCircle.ToString();
-                }
-                double tempPi = (double)4 * nInCircle / nInSquare;
-                pi.Text = tempPi.ToString();
-
+                firstStart = false;
+                gr.FillEllipse(Brushes.Bisque, 0, 0, 600, 600);
+            }
+            if (!isStarted)
+            {
+                buttonStartStop.Text = "Stop";
+                isStarted = true;
+            }
+            else
+            {
+                buttonStartStop.Text = "Start";
+                isStarted = false;
             }
         }
 
         private void FormMain_MouseDown(object sender, MouseEventArgs e)
         {
-        //    gr.FillEllipse(Brushes.Red, e.X, e.Y, 5, 5);
-        //    if (Math.Sqrt((centerX - e.X) * (centerX - e.X) + (centerY - e.Y) * (centerY - e.Y)) <= radius)
-        //    {
-        //        nInCircle++;
-        //        countCircle.Text = nInCircle.ToString();
-        //    }
-
-        //    nInSquare++;
             
-            
-        //    double tempPi = (double)4 * nInCircle / nInSquare;
-        //    pi.Text = tempPi.ToString();
         }
     }
 }

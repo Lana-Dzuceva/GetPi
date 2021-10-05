@@ -28,22 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.components = new System.ComponentModel.Container();
+            this.buttonStartStop = new System.Windows.Forms.Button();
             this.countRect = new System.Windows.Forms.Label();
             this.countCircle = new System.Windows.Forms.Label();
             this.pi = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // button1
+            // buttonStartStop
             // 
-            this.button1.Location = new System.Drawing.Point(250, 500);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 50);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Calculate";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonStartStop.Location = new System.Drawing.Point(250, 500);
+            this.buttonStartStop.Name = "buttonStartStop";
+            this.buttonStartStop.Size = new System.Drawing.Size(100, 50);
+            this.buttonStartStop.TabIndex = 0;
+            this.buttonStartStop.Text = "Start";
+            this.buttonStartStop.UseVisualStyleBackColor = true;
+            this.buttonStartStop.Click += new System.EventHandler(this.buttonStart);
             // 
             // countRect
             // 
@@ -81,6 +83,11 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Pi =";
             // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -90,7 +97,7 @@
             this.Controls.Add(this.pi);
             this.Controls.Add(this.countCircle);
             this.Controls.Add(this.countRect);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonStartStop);
             this.Name = "FormMain";
             this.Text = "Calculation Pi";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormMain_MouseDown);
@@ -101,11 +108,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonStartStop;
         private System.Windows.Forms.Label countRect;
         private System.Windows.Forms.Label countCircle;
         private System.Windows.Forms.Label pi;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timer;
     }
 }
 
